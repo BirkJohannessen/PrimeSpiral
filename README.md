@@ -16,4 +16,10 @@ Altså primtallet 3 (3,3) vil være 3 enheter fra origo, og vinklet med 3 radian
 Skrevet selv.
 
 
+PrimeSpiral
+
 ![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/PrimeSpiral.png?raw=true)
+
+NaturalSpiral
+
+![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/Nspiral.png?raw=true)
