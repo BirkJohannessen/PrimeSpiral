@@ -5,46 +5,38 @@ import sympy
 from PIL import Image, ImageColor
 
 dimX=4000
-dimY=4000
-origoX=dimX/2
-origoY=dimY/2
+dimY=3000
+origoX=int(dimX/2)
+origoY=int(dimY/2)
 
 
-def createPrimeSpiral():
-    primes=list(sympy.primerange(2,int((dimY/2))))
+def createGraph(list, name):
     img = Image.new('RGB', (dimX,dimY),(0,0,0))
 
-    for prime in primes:
-        x,y=calcXY(prime)
-        drawPlus(x,y,img, 'white')
+    for i in list:
+        x,y=calcXY(i)
+        if(x<dimX and x>0 and y<dimY and y>0):
+            drawPlus(x,y,img, 'white')
 
-    img.save('PrimeSpiral.png')
+    img.save(name)
 
-def createNSpiral():
-    N=list(range(0,int(origoY)))
-    img = Image.new('RGB', (dimX,dimY),(0,0,0))
-
-    for n in N:
-        x, y = calcXY(n)
-        if n==397:
-            drawPlus(x,y,img,'red')
-        else:
-            drawPlus(x,y,img,'white')
-
-    img.save('Nspiral.png')
 
 def drawPlus(x,y, img, color):
-    img.putpixel((int(origoX + x), int(origoY + y)), ImageColor.getcolor(color, 'RGB')) #senter
-    img.putpixel((int(origoX + x+1), int(origoY + y)), ImageColor.getcolor(color, 'RGB')) #høyre
-    img.putpixel((int(origoX + x-1), int(origoY + y)), ImageColor.getcolor(color, 'RGB')) #venste
-    img.putpixel((int(origoX + x), int(origoY + y+1)), ImageColor.getcolor(color, 'RGB')) #opp
-    img.putpixel((int(origoX + x), int(origoY + y-1)), ImageColor.getcolor(color, 'RGB')) #ned
+    img.putpixel((x, y), ImageColor.getcolor(color, 'RGB')) #senter
+    if x+1<dimX:
+        img.putpixel((x+1, y), ImageColor.getcolor(color, 'RGB')) #høyre
+    if x-1>0:
+        img.putpixel((x-1, y), ImageColor.getcolor(color, 'RGB')) #venste
+    if y+1<dimY:
+        img.putpixel((x, y+1), ImageColor.getcolor(color, 'RGB')) #opp
+    if y-1>0:
+        img.putpixel((x, y-1), ImageColor.getcolor(color, 'RGB')) #ned
 
 
-def calcXY(prime):
-    radius = prime
-    x = radius*math.cos(prime)
-    y = radius*math.sin(prime)
+def calcXY(i):
+    radius = i
+    x = int(radius*math.cos(i)+origoX)
+    y = int(radius*math.sin(i)+origoY)
     return x,y
 
 def drawOrigo(img, color):
@@ -56,5 +48,7 @@ def drawAxis(img, color):
         img.putpixel((int(i),int(origoY)),ImageColor.getcolor(color, 'RGB'))
 
 if __name__ == "__main__":
-    createPrimeSpiral()
-    createNSpiral()
+    primes=list(sympy.primerange(0,10000))
+    naturals=list(range(0,10000))
+    createGraph(primes, 'PrimeSpiral.png')
+    createGraph(naturals, 'Nspiral.png')
