@@ -4,8 +4,8 @@ import scipy.misc as smp
 import sympy
 from PIL import Image, ImageColor
 
-dimX=7000
-dimY=7000
+dimX=4000
+dimY=4000
 origoX=dimX/2
 origoY=dimY/2
 
