@@ -15,6 +15,7 @@ Baserer seg ved å representere primtall ved primtallets radius og radian fra or
 Altså primtallet 3 (3,3) vil være 3 enheter fra origo, og vinklet med 3 radian på enhetssirkelen.
 Skrevet selv.
 
+ref. https://www.youtube.com/watch?v=EK32jo7i5LQ&ab_channel=3Blue1Brown
 
 PrimeSpiral
 
