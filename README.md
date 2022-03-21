@@ -18,10 +18,10 @@ Skrevet selv.
 ref. https://www.youtube.com/watch?v=EK32jo7i5LQ&ab_channel=3Blue1Brown
 
 PrimeSpiral low scale, alle 9592 primtall mellom 0 og 100 tusen
-![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/bigPrimeSpiral.png?raw=true)
+![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/PrimeSpiral10k2.png?raw=true)
 
 PrimeSpiral, high scale, alle 78498 primtall som er mellom 0 og 1 million
-![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/PrimeSpiral1mill.png?raw=true)
+![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/PrimeSpiral70k.png?raw=true)
 
 PrimeSpiral, highest scale, alle 5761455 primtall som er mellom 0 og 200 millioner
 ![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/PrimeSpiral5mil.png?raw=true)
