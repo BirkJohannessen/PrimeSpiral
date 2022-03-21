@@ -19,8 +19,8 @@ ref. https://www.youtube.com/watch?v=EK32jo7i5LQ&ab_channel=3Blue1Brown
 
 PrimeSpiral
 
-![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/PrimeSpiral.png?raw=true)
+![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/bigPrimeSpiral.png?raw=true)
 
 NaturalSpiral
 
-![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/Nspiral.png?raw=true)
+![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/bigNspiral.png?raw=true)
