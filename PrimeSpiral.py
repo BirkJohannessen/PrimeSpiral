@@ -1,27 +1,13 @@
 import math
 import sympy
 from PIL import Image, ImageColor
-primerange=100000
-#dimBigX=6000
-#dimBigY=3000
-scale=30
+primerange=100000000
+scale=30000
 
 dimX=6000
 dimY=3000
 origoX=int(dimX/2)
 origoY=int(dimY/2)
-
-#def createBigGraph(list, name):
-    #img = Image.new('RGB', (dimBigX, dimBigY), (0, 0, 0))
-
-    #for i in list:
-        #x, y = calcXY(i)
-        #x=int(((x-origoX)+(dimBigX/2)))
-       # y=int(((y-origoY)+(dimBigY/2)))
-       # if (x < dimBigX and x > 0 and y < dimBigY and y > 0):
-        ##    drawStar(x, y, img, 'turquoise')
-
-  #  img.save(name)
 
 def createGraph(list, name):
     img = Image.new('RGB', (dimX,dimY),(0,0,0))
@@ -31,7 +17,7 @@ def createGraph(list, name):
         x=int(x)
         y=int(y)
         if(x<dimX and x>0 and y<dimY and y>0):
-            drawStar(x,y,img, 'turquoise')
+            drawPlus(x,y,img, 'turquoise')
 
     img.save(name)
 
@@ -65,28 +51,13 @@ def drawStar(x,y, img, color): #tegner en stor piksel i grafen.
 
 
 
-
-
-
 def calcXY(i): #omregner (radius,radian) til (x,y)
     radius = i
     x = int((radius*math.cos(i))/scale+origoX)
     y = int((radius*math.sin(i))/scale+origoY)
     return x,y
 
-def drawOrigo(img, color): #legg til i koden for å få en prikk i origo.
-    img.putpixel((int(origoX), int(origoY)), ImageColor.getcolor(color, 'RGB')) #senter
-
-def drawAxis(img, color): #legg til i koden for å få koordinatakser
-    for i in range(0,dimX-1):
-        img.putpixel((int(origoX),int(i)),ImageColor.getcolor(color, 'RGB'))
-        img.putpixel((int(i),int(origoY)),ImageColor.getcolor(color, 'RGB'))
-
 if __name__ == "__main__":
     primes=list(sympy.primerange(0,primerange))
     print(len(primes))
-    #naturals=list(range(0,300000))
-    createGraph(primes, 'PrimeSpiral200k.png')
-    #createGraph(naturals, 'Nspiral.png')
-    #createBigGraph(primes, 'bigPrimeSpiral.png')
-    #createBigGraph(naturals, 'bigNspiral.png')
+    createGraph(primes, 'PrimeSpiral5mill2.png')
