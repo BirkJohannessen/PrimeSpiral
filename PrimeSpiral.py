@@ -1,26 +1,27 @@
 import math
 import sympy
 from PIL import Image, ImageColor
-dimBigX=6000
-dimBigY=3000
-scale=19
+primerange=100000
+#dimBigX=6000
+#dimBigY=3000
+scale=30
 
-dimX=7000
-dimY=4000
+dimX=6000
+dimY=3000
 origoX=int(dimX/2)
 origoY=int(dimY/2)
 
-def createBigGraph(list, name):
-    img = Image.new('RGB', (dimBigX, dimBigY), (0, 0, 0))
+#def createBigGraph(list, name):
+    #img = Image.new('RGB', (dimBigX, dimBigY), (0, 0, 0))
 
-    for i in list:
-        x, y = calcXY(i)
-        x=int(((x-origoX)+(dimBigX/2)))
-        y=int(((y-origoY)+(dimBigY/2)))
-        if (x < dimBigX and x > 0 and y < dimBigY and y > 0):
-            drawStar(x, y, img, 'turquoise')
+    #for i in list:
+        #x, y = calcXY(i)
+        #x=int(((x-origoX)+(dimBigX/2)))
+       # y=int(((y-origoY)+(dimBigY/2)))
+       # if (x < dimBigX and x > 0 and y < dimBigY and y > 0):
+        ##    drawStar(x, y, img, 'turquoise')
 
-    img.save(name)
+  #  img.save(name)
 
 def createGraph(list, name):
     img = Image.new('RGB', (dimX,dimY),(0,0,0))
@@ -30,7 +31,7 @@ def createGraph(list, name):
         x=int(x)
         y=int(y)
         if(x<dimX and x>0 and y<dimY and y>0):
-            drawStar(x,y,img, 'white')
+            drawStar(x,y,img, 'turquoise')
 
     img.save(name)
 
@@ -44,7 +45,7 @@ def drawPlus(x,y, img, color): #tegner en + i grafen.
         img.putpixel((x, y-1), ImageColor.getcolor(color, 'RGB')) #ned
 
 def drawStar(x,y, img, color): #tegner en stor piksel i grafen.
-    if x+2<dimBigX and x-2>0 and y+2<dimBigY and y-2>0:
+    if x+2<dimX and x-2>0 and y+2<dimY and y-2>0:
         img.putpixel((x, y), ImageColor.getcolor(color, 'RGB'))  # senter
 
         img.putpixel((x+1, y), ImageColor.getcolor(color, 'RGB')) #høyre
@@ -82,9 +83,10 @@ def drawAxis(img, color): #legg til i koden for å få koordinatakser
         img.putpixel((int(i),int(origoY)),ImageColor.getcolor(color, 'RGB'))
 
 if __name__ == "__main__":
-    primes=list(sympy.primerange(0,150000))
-    naturals=list(range(0,150000))
-    createGraph(primes, 'PrimeSpiral.png')
-    createGraph(naturals, 'Nspiral.png')
+    primes=list(sympy.primerange(0,primerange))
+    print(len(primes))
+    #naturals=list(range(0,300000))
+    createGraph(primes, 'PrimeSpiral200k.png')
+    #createGraph(naturals, 'Nspiral.png')
     #createBigGraph(primes, 'bigPrimeSpiral.png')
-    createBigGraph(naturals, 'bigNspiral.png')
+    #createBigGraph(naturals, 'bigNspiral.png')
