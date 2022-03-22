@@ -19,6 +19,9 @@ Skrevet selv.\
 Prosjekt jobbet parallelt uavhenging med https://github.com/591291-hvl/UlamSpiral (polar coordinate delen)\
 Ref. https://www.youtube.com/watch?v=EK32jo7i5LQ&ab_channel=3Blue1Brown
 
+PrimeSpiral 8k, alle 5133 primtall mellom 0 og 50 tusen i gult. blå er naturlige ikke primtall.
+![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/bilder/nonPrimes/Prime8ktest.png?raw=true)
+
 PrimeSpiral 8k, alle 9592 primtall mellom 0 og 100 tusen
 ![alt text](https://github.com/BirkJohannessen/PrimeSpiral/blob/main/bilder/8k/Prime8k10k.png?raw=true)
 
