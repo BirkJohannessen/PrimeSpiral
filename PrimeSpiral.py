@@ -3,14 +3,14 @@ import sympy
 from PIL import Image, ImageColor
 
 
-primeRange=200000000
+primeRange=50000
 
 
 #bilde dimensjon, endre etter behov
-dimX=int(15360)  #16k=15360x8640
-dimY=int(8640)
+dimX=int(15360/2)  #16k=15360x8640
+dimY=int(8640/2)
 backgroundColor=(0,0,0)
-primeColor= 'turquoise'  #Turquoise
+primeColor= 'white'  #Turquoise
 
 
 #noen faste brukte verdier
@@ -25,11 +25,14 @@ scale=biggestPrime/pixelRadius
 
 def createGraph(list, name):
     img = Image.new('RGB', (dimX,dimY),backgroundColor) #canvas
-
+    #for i in range(0,primeRange):
+    #    x,y=calcXY(i)
+    #    if(x<dimX and x>0 and y<dimY and y>0):
+    #        drawStar(x,y,img, 'blue')
     for i in list:
         x,y=calcXY(i)
         if(x<dimX and x>0 and y<dimY and y>0): #skjekker at verdien ikke er utenfor canvas
-            drawDot(x,y,img, primeColor)
+            drawStar(x,y,img, primeColor)
 
     img.save(name)
 
@@ -76,4 +79,4 @@ def drawStar(x,y, img, color): #tegner en stor piksel i grafen.
 if __name__ == "__main__":
     print(len(primeList))
     print(primeList[-1])
-    createGraph(primeList, 'Prime16k11m.png')
+    createGraph(primeList, 'Prime8ktest.png')
