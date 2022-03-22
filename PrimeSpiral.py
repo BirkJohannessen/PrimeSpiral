@@ -1,26 +1,48 @@
 import math
 import sympy
 from PIL import Image, ImageColor
-primerange=100000000
-scale=30000
 
-dimX=6000
-dimY=3000
+
+primeRange=200000000
+
+
+#bilde dimensjon, endre etter behov
+dimX=int(15360)  #16k=15360x8640
+dimY=int(8640)
+backgroundColor=(0,0,0)
+primeColor= 'turquoise'  #Turquoise
+
+
+#noen faste brukte verdier
+primeList = list(sympy.primerange(0, primeRange)) #tabell av primtall
 origoX=int(dimX/2)
 origoY=int(dimY/2)
+pixelRadius=int(math.sqrt((dimX/2)**2+(dimY/2)**2)) #Pytagoras for å få avstand fra origo til hjørnet
+biggestPrime = primeList[-1]
+scale=biggestPrime/pixelRadius
+
+
 
 def createGraph(list, name):
-    img = Image.new('RGB', (dimX,dimY),(0,0,0))
+    img = Image.new('RGB', (dimX,dimY),backgroundColor) #canvas
 
     for i in list:
         x,y=calcXY(i)
-        x=int(x)
-        y=int(y)
-        if(x<dimX and x>0 and y<dimY and y>0):
-            drawPlus(x,y,img, 'turquoise')
+        if(x<dimX and x>0 and y<dimY and y>0): #skjekker at verdien ikke er utenfor canvas
+            drawDot(x,y,img, primeColor)
 
     img.save(name)
 
+
+def calcXY(i): #omregner (radius,radian) til (x,y)
+    radius = i
+    x = int(((radius*math.cos(i))*-1/scale)+(origoX))   #*-1 for å rette opp aksene
+    y = int(((radius*math.sin(i))*-1/scale+(origoY)))
+    return x,y
+
+#litt forskjellige former å tegne på
+def drawDot(x,y,img,color):
+    img.putpixel((x, y), ImageColor.getcolor(color, 'RGB')) #senter
 
 def drawPlus(x,y, img, color): #tegner en + i grafen.
     img.putpixel((x, y), ImageColor.getcolor(color, 'RGB')) #senter
@@ -51,13 +73,7 @@ def drawStar(x,y, img, color): #tegner en stor piksel i grafen.
 
 
 
-def calcXY(i): #omregner (radius,radian) til (x,y)
-    radius = i
-    x = int((radius*math.cos(i))/scale+origoX)
-    y = int((radius*math.sin(i))/scale+origoY)
-    return x,y
-
 if __name__ == "__main__":
-    primes=list(sympy.primerange(0,primerange))
-    print(len(primes))
-    createGraph(primes, 'PrimeSpiral5mill2.png')
+    print(len(primeList))
+    print(primeList[-1])
+    createGraph(primeList, 'Prime16k11m.png')
