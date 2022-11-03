@@ -3,14 +3,14 @@ import sympy
 from PIL import Image, ImageColor
 
 
-primeRange=50000
+primeRange=100000
 
 
 #bilde dimensjon, endre etter behov
 dimX=int(15360/2)  #16k=15360x8640
 dimY=int(8640/2)
 backgroundColor=(0,0,0)
-primeColor= 'white'  #Turquoise
+primeColor= 'blue'  #Turquoise
 
 
 #noen faste brukte verdier
