@@ -1,43 +1,39 @@
 import math
+import sys
 import sympy
 from PIL import Image, ImageColor
 
-
-primeRange=100000
-
+primeList = []
 
 #bilde dimensjon, endre etter behov
 dimX=int(15360/2)  #16k=15360x8640
 dimY=int(8640/2)
-backgroundColor=(0,0,0)
-primeColor= 'blue'  #Turquoise
 
+backgroundColor=(0,0,0)
+primeColor= 'Turquoise'  #Turquoise
 
 #noen faste brukte verdier
-primeList = list(sympy.primerange(0, primeRange)) #tabell av primtall
 origoX=int(dimX/2)
 origoY=int(dimY/2)
 pixelRadius=int(math.sqrt((dimX/2)**2+(dimY/2)**2)) #Pytagoras for å få avstand fra origo til hjørnet
-biggestPrime = primeList[-1]
-scale=biggestPrime/pixelRadius
 
 
 
-def createGraph(list, name):
+def createGraph(list, name, scale):
     img = Image.new('RGB', (dimX,dimY),backgroundColor) #canvas
     #for i in range(0,primeRange):
     #    x,y=calcXY(i)
     #    if(x<dimX and x>0 and y<dimY and y>0):
     #        drawStar(x,y,img, 'blue')
     for i in list:
-        x,y=calcXY(i)
+        x,y=calcXY(i, scale)
         if(x<dimX and x>0 and y<dimY and y>0): #skjekker at verdien ikke er utenfor canvas
-            drawStar(x,y,img, primeColor)
+            drawDot(x,y,img, primeColor)
 
     img.save(name)
 
 
-def calcXY(i): #omregner (radius,radian) til (x,y)
+def calcXY(i, scale): #omregner (radius,radian) til (x,y)
     radius = i
     x = int(((radius*math.cos(i))*-1/scale)+(origoX))   #*-1 for å rette opp aksene
     y = int(((radius*math.sin(i))*-1/scale+(origoY)))
@@ -77,6 +73,19 @@ def drawStar(x,y, img, color): #tegner en stor piksel i grafen.
 
 
 if __name__ == "__main__":
-    print(len(primeList))
-    print(primeList[-1])
-    createGraph(primeList, 'Prime8ktest.png')
+    #print(len(primeList))
+    #print(primeList[-1])
+    print("STARTING PrimeSpiral!")
+    print("Calculating primes .. ")
+
+    primeRange = int(sys.argv[1])
+    filename = 'PRIME_' + str(primeRange) + '.png'
+
+    primeList = list(sympy.primerange(0, primeRange)) #tabell av primtall
+
+    print("Drawing the canvas ..")
+    biggestPrime = primeList[-1]
+    scale=biggestPrime/pixelRadius
+
+    createGraph(primeList, filename, scale)
+
