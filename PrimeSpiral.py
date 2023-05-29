@@ -3,37 +3,38 @@ import sys
 import sympy
 from PIL import Image, ImageColor
 
-primeList = []
-
-#bilde dimensjon, endre etter behov
-dimX=int(15360/2)  #16k=15360x8640
-dimY=int(8640/2)
 
 backgroundColor=(0,0,0)
 primeColor= 'Turquoise'  #Turquoise
 
-#noen faste brukte verdier
-origoX=int(dimX/2)
-origoY=int(dimY/2)
-pixelRadius=int(math.sqrt((dimX/2)**2+(dimY/2)**2)) #Pytagoras for å få avstand fra origo til hjørnet
 
 
 
-def createGraph(list, name, scale):
+def createGraph(list, name, scale, dimX, dimY, dotType):
+    #noen faste brukte verdier
+    origoX=int(dimX/2)
+    origoY=int(dimY/2)
     img = Image.new('RGB', (dimX,dimY),backgroundColor) #canvas
-    #for i in range(0,primeRange):
-    #    x,y=calcXY(i)
-    #    if(x<dimX and x>0 and y<dimY and y>0):
-    #        drawStar(x,y,img, 'blue')
-    for i in list:
-        x,y=calcXY(i, scale)
-        if(x<dimX and x>0 and y<dimY and y>0): #skjekker at verdien ikke er utenfor canvas
-            drawDot(x,y,img, primeColor)
 
+    if dotType == "1":
+        for i in list:
+            x,y=calcXY(i, scale, origoX, origoY)
+            if(x<dimX and x>0 and y<dimY and y>0): #skjekker at verdien ikke er utenfor canvas
+                drawDot(x,y,img, primeColor)
+    if dotType == "2":
+        for i in list:
+            x,y=calcXY(i, scale, origoX, origoY)
+            if(x<dimX and x>0 and y<dimY and y>0): #skjekker at verdien ikke er utenfor canvas
+                drawPlus(x,y,img, primeColor, dimX, dimY)
+    if dotType == "3":
+        for i in list:
+            x,y=calcXY(i, scale, origoX, origoY)
+            if(x<dimX and x>0 and y<dimY and y>0): #skjekker at verdien ikke er utenfor canvas
+                drawStar(x,y,img, primeColor, dimX, dimY)
     img.save(name)
 
 
-def calcXY(i, scale): #omregner (radius,radian) til (x,y)
+def calcXY(i, scale, origoX, origoY): #omregner (radius,radian) til (x,y)
     radius = i
     x = int(((radius*math.cos(i))*-1/scale)+(origoX))   #*-1 for å rette opp aksene
     y = int(((radius*math.sin(i))*-1/scale+(origoY)))
@@ -43,7 +44,7 @@ def calcXY(i, scale): #omregner (radius,radian) til (x,y)
 def drawDot(x,y,img,color):
     img.putpixel((x, y), ImageColor.getcolor(color, 'RGB')) #senter
 
-def drawPlus(x,y, img, color): #tegner en + i grafen.
+def drawPlus(x,y, img, color, dimX, dimY): #tegner en + i grafen.
     img.putpixel((x, y), ImageColor.getcolor(color, 'RGB')) #senter
     if x+1<dimX and x-1>0 and y+1<dimY and y-1>0:
         img.putpixel((x+1, y), ImageColor.getcolor(color, 'RGB')) #høyre
@@ -51,7 +52,7 @@ def drawPlus(x,y, img, color): #tegner en + i grafen.
         img.putpixel((x, y+1), ImageColor.getcolor(color, 'RGB')) #opp
         img.putpixel((x, y-1), ImageColor.getcolor(color, 'RGB')) #ned
 
-def drawStar(x,y, img, color): #tegner en stor piksel i grafen.
+def drawStar(x,y, img, color, dimx, dimY): #tegner en stor piksel i grafen.
     if x+2<dimX and x-2>0 and y+2<dimY and y-2>0:
         img.putpixel((x, y), ImageColor.getcolor(color, 'RGB'))  # senter
 
@@ -76,16 +77,29 @@ if __name__ == "__main__":
     #print(len(primeList))
     #print(primeList[-1])
     print("STARTING PrimeSpiral!")
-    print("Calculating primes .. ")
 
     primeRange = int(sys.argv[1])
-    filename = 'PRIME_' + str(primeRange) + '.png'
+    downScaler = int(sys.argv[2])
 
+    print("Calculating primes .. ")
     primeList = list(sympy.primerange(0, primeRange)) #tabell av primtall
 
-    print("Drawing the canvas ..")
+    dotRadius = sys.argv[3]
+    filename = 'PRIME_' + str(primeRange) + '.png'
     biggestPrime = primeList[-1]
-    scale=biggestPrime/pixelRadius
+    #bilde dimensjon, endre etter behov
+    dimX=int(15360/downScaler)  #16k=15360x8640
+    dimY=int(8640/downScaler)
+    pixelRadius=int(math.sqrt((dimX/2)**2+(dimY/2)**2)) #Pytagoras for å få avstand fra origo til hjørnet
+    scale = biggestPrime/pixelRadius
 
-    createGraph(primeList, filename, scale)
+
+    print("Drawing the canvas ..")
+
+
+
+
+
+
+    createGraph(primeList, filename, scale, dimX, dimY, dotRadius)
 
