@@ -36,12 +36,16 @@ def calc(primeRange):
 
     filename = 'PRIME_{range}.svg'
     filename = filename.format(range = str(primeRange))
-    biggestPrime = primeList[-1]
     #bilde dimensjon, endre etter behov
     downScaler = downScale(primeRange)
     dimX=int(15360/downScaler)  #16k=15360x8640
     dimY=int(8640/downScaler)
     pixelRadius=int(math.sqrt((dimX/2)**2+(dimY/2)**2)) #Pytagoras for å få avstand fra origo til hjørnet
+
+    biggestPrime = 0
+    if primeRange > 0:
+        biggestPrime = primeList[-1]
+
     scale = biggestPrime/pixelRadius
     print("generating svg...")
     svg(primeList, filename, scale, dimX, dimY, radiusScale(primeRange))
