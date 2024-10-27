@@ -43,7 +43,7 @@ def calc(primeRange):
     pixelRadius=int(math.sqrt((dimX/2)**2+(dimY/2)**2)) #Pytagoras for å få avstand fra origo til hjørnet
 
     biggestPrime = 0
-    if primeRange > 0:
+    if primeRange > 2:
         biggestPrime = primeList[-1]
 
     scale = biggestPrime/pixelRadius
@@ -52,7 +52,19 @@ def calc(primeRange):
     print("done!")
 
 def radiusScale(range):
-    return 2
+    if ranger(0, 2048, range):
+        return 1
+    if ranger(128, 2048, range):
+        return 1
+    if ranger(2048, 65565, range):
+        return 1
+    if ranger(2048, 65536, range):
+        return 2
+    if ranger(65536, 524288, range):
+        return 2
+    if ranger(524288, 1048576, range):
+        return 4
+    return 4
 
 def downScale(range):
     if ranger(0, 128, range):
@@ -75,13 +87,14 @@ if __name__ == "__main__":
     #print(len(primeList))
     #print(primeList[-1])
     print("STARTING (svg) PrimeSpiral!")
-
     # primeRange = int(sys.argv[1])
     # downScaler = int(sys.argv[1])
     # radius = int(sys.argv[2])
 
-    range = list(range(20))
+    rnge = int(sys.argv[1])
+    if rnge < 64:
+        range = list(map(lambda x: 2 ** x, list(range(rnge))))
 
-    for i in range:
-        calc(i)
+        for i in range:
+            calc(i)
 
